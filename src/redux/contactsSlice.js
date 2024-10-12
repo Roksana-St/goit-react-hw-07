@@ -24,27 +24,11 @@ const contactsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(addContact.pending, (state) => {
-        state.loading = true;
-      })
       .addCase(addContact.fulfilled, (state, action) => {
-        state.loading = false;
         state.items.push(action.payload);
       })
-      .addCase(addContact.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
-      .addCase(deleteContact.pending, (state) => {
-        state.loading = true;
-      })
       .addCase(deleteContact.fulfilled, (state, action) => {
-        state.loading = false;
         state.items = state.items.filter((contact) => contact.id !== action.payload.id);
-      })
-      .addCase(deleteContact.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
       });
   },
 });
@@ -54,7 +38,3 @@ export const selectLoading = (state) => state.contacts.loading;
 export const selectError = (state) => state.contacts.error;
 
 export default contactsSlice.reducer;
-
-
-
-
